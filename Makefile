@@ -24,3 +24,7 @@ clean:
 # Usage: make release bump=patch (or minor, major, 0.3.0)
 release:
 	@./scripts/release.sh $(bump)
+
+# Usage: make update-homebrew version=0.2.0
+update-homebrew:
+	@./scripts/update-homebrew.sh $(version)
