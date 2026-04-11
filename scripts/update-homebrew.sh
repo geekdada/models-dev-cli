@@ -85,15 +85,17 @@ echo ""
 echo "Cloning ${TAP_REPO}..."
 gh repo clone "$TAP_REPO" "$TMPDIR/homebrew-tap" -- --depth 1
 
+cd "$TMPDIR/homebrew-tap"
+git remote set-url origin "https://x-access-token:${GH_TOKEN}@github.com/${TAP_REPO}.git"
+
 mkdir -p "$TMPDIR/homebrew-tap/Formula"
 echo "$FORMULA" > "$TMPDIR/homebrew-tap/Formula/models.rb"
 
-cd "$TMPDIR/homebrew-tap"
 git add Formula/models.rb
 if git diff --cached --quiet; then
   echo "No changes to formula."
 else
   git commit -m "Update models to ${VERSION}"
-  git push
+  git push origin HEAD:master
   echo "Formula pushed to ${TAP_REPO}."
 fi
