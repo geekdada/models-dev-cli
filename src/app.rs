@@ -38,8 +38,13 @@ fn fuzzy_score(haystack: &str, query: &str, matcher: &mut Matcher) -> Option<u32
     }
     let mut buf = Vec::new();
     let haystack_utf32 = Utf32Str::new(haystack, &mut buf);
-    Pattern::new(query, CaseMatching::Ignore, Normalization::Smart, AtomKind::Fuzzy)
-        .score(haystack_utf32, matcher)
+    Pattern::new(
+        query,
+        CaseMatching::Ignore,
+        Normalization::Smart,
+        AtomKind::Fuzzy,
+    )
+    .score(haystack_utf32, matcher)
 }
 
 fn fuzzy_match_item(
@@ -102,8 +107,11 @@ fn fuzzy_match_item(
         })
     } else {
         // Provider-only match
-        let provider_score = fuzzy_score(provider_name, query, matcher)
-            .max(fuzzy_score(provider_id, query, matcher));
+        let provider_score = fuzzy_score(provider_name, query, matcher).max(fuzzy_score(
+            provider_id,
+            query,
+            matcher,
+        ));
         provider_score.map(|score| FuzzyHit {
             item: ListItem::Provider {
                 id: provider_id.to_string(),
@@ -194,13 +202,7 @@ impl App {
             let provider = &self.data[pid];
 
             // Try provider match
-            if let Some(hit) = fuzzy_match_item(
-                pid,
-                &provider.name,
-                None,
-                query,
-                &mut matcher,
-            ) {
+            if let Some(hit) = fuzzy_match_item(pid, &provider.name, None, query, &mut matcher) {
                 providers.push(hit);
             }
 
@@ -227,7 +229,7 @@ impl App {
         // Providers first, then models
         providers
             .into_iter()
-            .chain(models.into_iter())
+            .chain(models)
             .map(|h| h.item)
             .collect()
     }
@@ -356,7 +358,9 @@ impl App {
     }
 
     pub fn clamp_detail_scroll(&mut self) {
-        let max_scroll = self.detail_content_height.saturating_sub(self.detail_height);
+        let max_scroll = self
+            .detail_content_height
+            .saturating_sub(self.detail_height);
         if self.detail_scroll > max_scroll {
             self.detail_scroll = max_scroll;
         }

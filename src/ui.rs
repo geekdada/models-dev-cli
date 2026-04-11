@@ -2,7 +2,9 @@ use ratatui::{
     layout::{Constraint, Direction, Layout, Rect},
     style::{Color, Modifier, Style},
     text::{Line, Span},
-    widgets::{Block, Borders, List, Paragraph, Scrollbar, ScrollbarOrientation, ScrollbarState, Wrap},
+    widgets::{
+        Block, Borders, List, Paragraph, Scrollbar, ScrollbarOrientation, ScrollbarState, Wrap,
+    },
     Frame,
 };
 
@@ -114,10 +116,7 @@ fn render_list(frame: &mut Frame, area: Rect, app: &mut App) {
                             .fg(Color::Cyan)
                             .add_modifier(Modifier::BOLD),
                     ),
-                    Span::styled(
-                        " [provider]",
-                        Style::default().fg(Color::DarkGray),
-                    ),
+                    Span::styled(" [provider]", Style::default().fg(Color::DarkGray)),
                 ]))
             }
             AppListItem::Model {
@@ -194,7 +193,7 @@ fn render_detail(frame: &mut Frame, area: Rect, app: &mut App) {
     let total_lines: u16 = lines
         .iter()
         .map(|line| {
-            let line_width = line.width() as usize;
+            let line_width = line.width();
             if content_width == 0 {
                 1u16
             } else {
@@ -371,10 +370,7 @@ fn render_model_detail(
     if let Some(ow) = model.open_weights {
         let color = if ow { Color::Green } else { Color::Red };
         lines.push(Line::from(vec![
-            Span::styled(
-                format!("  {} ", bool_check(ow)),
-                Style::default().fg(color),
-            ),
+            Span::styled(format!("  {} ", bool_check(ow)), Style::default().fg(color)),
             Span::styled("Open Weights", Style::default().fg(Color::White)),
         ]));
     }

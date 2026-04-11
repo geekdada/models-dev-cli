@@ -10,10 +10,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     eprintln!("Fetching data from models.dev...");
     let api_data = match data::fetch_data() {
         Ok(data) => {
-            eprintln!(
-                "Loaded {} providers.",
-                data.len()
-            );
+            eprintln!("Loaded {} providers.", data.len());
             data
         }
         Err(e) => {
