@@ -7,6 +7,9 @@ on:
 env:
   CARGO_TERM_COLOR: always
 
+permissions:
+  contents: write
+
 jobs:
   build:
     runs-on: ${{ matrix.os }}
@@ -59,12 +62,17 @@ jobs:
           cd target/${{ matrix.target }}/release
           Compress-Archive -Path models.exe -DestinationPath ../../../models-${{ matrix.target }}.zip
 
-      - name: Upload release assets
+      - name: Upload release assets (Unix)
+        if: runner.os != 'Windows'
         uses: softprops/action-gh-release@v2
         with:
-          files: |
-            models-${{ matrix.target }}.tar.gz
-            models-${{ matrix.target }}.zip
+          files: models-${{ matrix.target }}.tar.gz
+
+      - name: Upload release assets (Windows)
+        if: runner.os == 'Windows'
+        uses: softprops/action-gh-release@v2
+        with:
+          files: models-${{ matrix.target }}.zip
 
   update-homebrew:
     needs: build
