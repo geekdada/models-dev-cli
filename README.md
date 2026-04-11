@@ -13,11 +13,19 @@ A terminal UI for browsing AI model data from [models.dev](https://models.dev).
 
 ## Install
 
+### Homebrew
+
+```sh
+brew install geekdada/tap/models
+```
+
+### Cargo
+
 ```sh
 cargo install --path .
 ```
 
-This installs the `models` binary.
+Both methods install the `models` binary.
 
 ## Usage
 
