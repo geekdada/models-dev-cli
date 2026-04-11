@@ -273,9 +273,6 @@ impl App {
                 {
                     self.should_quit = true;
                 }
-                KeyCode::Char('q') => {
-                    self.should_quit = true;
-                }
                 KeyCode::Esc => match self.view {
                     View::Level2 { .. } => {
                         self.view = View::Level1;

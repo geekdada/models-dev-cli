@@ -61,13 +61,13 @@ fn render_title(frame: &mut Frame, area: Rect, app: &App) {
 fn render_footer(frame: &mut Frame, area: Rect, app: &App) {
     let help = match &app.view {
         crate::app::View::Level1 => {
-            " ↑↓ Navigate │ Enter: Drill into provider │ Esc: Quit │ PgUp/PgDn: Scroll details │ q: Quit"
+            " ↑↓ Navigate │ Enter: Drill into provider │ Esc: Quit │ PgUp/PgDn: Scroll details"
         }
         crate::app::View::Level2 { .. } => {
-            " ↑↓ Navigate │ Enter: View model │ Esc: Back │ PgUp/PgDn: Scroll details │ q: Quit"
+            " ↑↓ Navigate │ Enter: View model │ Esc: Back │ PgUp/PgDn: Scroll details"
         }
     };
-    let footer = Paragraph::new(help).style(Style::default().fg(Color::DarkGray));
+    let footer = Paragraph::new(help).style(Style::default().fg(Color::Gray));
     frame.render_widget(footer, area);
 }
 
@@ -116,7 +116,7 @@ fn render_list(frame: &mut Frame, area: Rect, app: &mut App) {
                             .fg(Color::Cyan)
                             .add_modifier(Modifier::BOLD),
                     ),
-                    Span::styled(" [provider]", Style::default().fg(Color::DarkGray)),
+                    Span::styled(" [provider]", Style::default().fg(Color::Gray)),
                 ]))
             }
             AppListItem::Model {
@@ -132,7 +132,7 @@ fn render_list(frame: &mut Frame, area: Rect, app: &mut App) {
                 if matches!(app.view, crate::app::View::Level1) {
                     spans.push(Span::styled(
                         format!(" ({})", provider_name),
-                        Style::default().fg(Color::DarkGray),
+                        Style::default().fg(Color::Gray),
                     ));
                 }
                 ratatui::widgets::ListItem::new(Line::from(spans))
@@ -153,7 +153,7 @@ fn render_list(frame: &mut Frame, area: Rect, app: &mut App) {
         )
         .highlight_style(
             Style::default()
-                .bg(Color::DarkGray)
+                .bg(Color::Indexed(238))
                 .add_modifier(Modifier::BOLD),
         )
         .highlight_symbol(">> ");
@@ -209,7 +209,7 @@ fn render_detail(frame: &mut Frame, area: Rect, app: &mut App) {
             Block::default()
                 .borders(Borders::ALL)
                 .title(" Details")
-                .border_style(Style::default().fg(Color::DarkGray)),
+                .border_style(Style::default().fg(Color::Gray)),
         )
         .wrap(Wrap { trim: false })
         .scroll((app.detail_scroll, 0));
@@ -229,7 +229,7 @@ fn render_detail(frame: &mut Frame, area: Rect, app: &mut App) {
             .viewport_content_length(app.detail_height as usize)
             .position(scrollbar_pos);
         let scrollbar = Scrollbar::new(ScrollbarOrientation::VerticalRight)
-            .style(Style::default().fg(Color::DarkGray));
+            .style(Style::default().fg(Color::Gray));
         frame.render_stateful_widget(scrollbar, area, &mut scrollbar_state);
     }
 }
