@@ -1,0 +1,30 @@
+{
+  "name": "models-dev-cli",
+  "version": "1.0.0",
+  "description": "A terminal UI for browsing AI model data from [models.dev](https://models.dev).",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepare": "husky"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/geekdada/models-dev-cli.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/geekdada/models-dev-cli/issues"
+  },
+  "homepage": "https://github.com/geekdada/models-dev-cli#readme",
+  "packageManager": "pnpm@10.33.0+sha512.10568bb4a6afb58c9eb3630da90cc9516417abebd3fabbe6739f0ae795728da1491e9db5a544c76ad8eb7570f5c4bb3d6c637b2cb41bfdcdb47fa823c8649319",
+  "lint-staged": {
+    "*.rs": "cargo fmt --"
+  },
+  "devDependencies": {
+    "husky": "^9.1.7",
+    "lint-staged": "^16.4.0"
+  }
+}
