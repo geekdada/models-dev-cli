@@ -1160,7 +1160,7 @@ dependencies = [
 
 [[package]]
 name = "models-dev-cli"
-version = "0.1.1"
+version = "0.1.2"
 dependencies = [
  "crossterm",
  "nucleo-matcher",
