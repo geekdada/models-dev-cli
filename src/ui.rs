@@ -61,7 +61,7 @@ fn render_title(frame: &mut Frame, area: Rect, app: &App) {
 fn render_footer(frame: &mut Frame, area: Rect, app: &App) {
     let help = match &app.view {
         crate::app::View::Level1 => {
-            " ↑↓ Navigate │ Enter: Drill into provider │ Esc: Quit │ PgUp/PgDn: Scroll details"
+            " ↑↓ Navigate │ Enter: Drill into provider │ Esc: Clear search │ PgUp/PgDn: Scroll details"
         }
         crate::app::View::Level2 { .. } => {
             " ↑↓ Navigate │ Enter: View model │ Esc: Back │ PgUp/PgDn: Scroll details"

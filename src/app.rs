@@ -283,7 +283,12 @@ impl App {
                         }
                     }
                     View::Level1 => {
-                        self.should_quit = true;
+                        self.level1_input.reset();
+                        self.detail_scroll = 0;
+                        self.update_filtered();
+                        if !self.filtered_items.is_empty() {
+                            self.list_state.select(Some(0));
+                        }
                     }
                 },
                 KeyCode::Up => {
